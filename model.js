@@ -128,7 +128,7 @@ module.exports = {
                             userExercisesDoc.save((erruserexerc,userexerc) => erruserexerc? done(erruserexerc): done(null,{
                                 username: data.username,
                                 description: description,
-                                duration: duration,
+                                duration: parseInt(duration),
                                 date: dateval,
                                 _id: data._id
                             }));
@@ -142,7 +142,7 @@ module.exports = {
                         userexerc.save((erruserexerc, userexerc) => (erruserexerc? done(erruserexerc) : done(null, {
                             username: data.username,
                             description: description,
-                            duration: duration,
+                            duration: parseInt(duration),
                             date: dateval,
                             _id: data._id
                         })));
