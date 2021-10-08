@@ -85,6 +85,11 @@ app.get('/api/users/:_id/logs', (req, res) => {
   let to = req.query.to;
   let limit = req.query.limit;
 
+  console.log('/api/users/:_id/logs ... _id'+_id);
+  console.log('/api/users/:_id/logs ... from'+from);
+  console.log('/api/users/:_id/logs ... to'+to);
+  console.log('/api/users/:_id/logs ... limit'+limit);
+
   getUserExerciseLog(_id, from, to, limit, (err, data) => {
 
     if (err) {

@@ -42,6 +42,7 @@ const userExercisesSchema = new Schema(
 /* https://stackoverflow.com/questions/17254008/stop-mongoose-from-creating-id-property-for-sub-document-array-items */
 const userExercisesSchema = new Schema(
     {
+        _id: {type: String, required: true},
         username: {type: String, required: true},
         count: Number,
         log: [exercisesSubSchema]
@@ -93,6 +94,7 @@ module.exports = {
                         //console.log(formatDate);
                         let userExercisesDoc = new UserExercises(
                             {
+                                _id: _id,
                                 username: data.username,
                                 count: 1,
                                 log: [{description: description,
