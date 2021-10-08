@@ -76,7 +76,7 @@ module.exports = {
 
     addExercises: function (_id, description, duration, date, done) {
 
-        let dateval =new Date(date+'T00:00:00').toDateString();
+        let dateval =new Date(date).toDateString();
         User.findById(_id, (err, data) => {
             if (err) {
                 done(err);
@@ -132,7 +132,7 @@ module.exports = {
             if (err === null && data!== null) {
 
                 UserExercises
-                .findOne({"username": data.username, "log.duration": 1}).lean()
+                .findOne({"username": data.username}).lean()
                     .exec(function(err2, data2)
                         {
                             /* findOne.lean() is key to be able to check json */
