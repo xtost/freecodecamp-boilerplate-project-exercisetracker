@@ -12,6 +12,17 @@ const exercisesSubSchema = new Schema(
     , { _id : false }
 );
 
+const exerciseSchema = new Schema(
+    {
+        _id: {type: String, required: true},
+        username: {type: String, required: true},
+        date: String,
+        duration: { type: Number, required: true},
+        description: { type: String, required: true},
+    }
+
+)
+
 const userSchema = new Schema(
     {
         username: {type: String, required: true}
@@ -83,6 +94,19 @@ module.exports = {
                 done(err);
             } else {
                 UserExercises.findOne({ username: data.username}, (erruserexerc, userexerc) => {
+/*
+                let Exercise =  mongoose.model('Exercise', exerciseSchema);
+                
+                var newexercise = Exercise.create({
+                                username: data.username,
+                                description: description,
+                                duration: duration,
+                                date: dateval,
+                                _id: data._id
+                            }, (err)=>done(err));
+            
+*/
+
                     if (erruserexerc || userexerc === null) {
 
                         //var formatDate = new Date(date);
@@ -101,7 +125,13 @@ module.exports = {
                                         duration: duration,
                                         date: dateval}]
                             });
-                            userExercisesDoc.save((erruserexerc,userexerc) => erruserexerc? done(erruserexerc): done(null,userexerc));
+                            userExercisesDoc.save((erruserexerc,userexerc) => erruserexerc? done(erruserexerc): done(null,{
+                                username: data.username,
+                                description: description,
+                                duration: duration,
+                                date: dateval,
+                                _id: data._id
+                            }));
                     } else {
                         userexerc['log'].push({
                             description: description,
@@ -109,7 +139,13 @@ module.exports = {
                             date: dateval
                         });
                         userexerc['count'] = userexerc['count'] + 1;
-                        userexerc.save((erruserexerc, userexerc) => (erruserexerc? done(erruserexerc) : done(null, userexerc)));
+                        userexerc.save((erruserexerc, userexerc) => (erruserexerc? done(erruserexerc) : done(null, {
+                            username: data.username,
+                            description: description,
+                            duration: duration,
+                            date: dateval,
+                            _id: data._id
+                        })));
                     }
 
                 });
