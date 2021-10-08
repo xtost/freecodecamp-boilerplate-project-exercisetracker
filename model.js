@@ -173,8 +173,15 @@ module.exports = {
                             data2.log = newlogs;
 
 
-                            if(err2) done(err2) ;
-                            else done(null,data2);
+                            if(err2)
+                            { 
+                              //  console.log('err2: '+err2);
+                                done(err2) ;
+                            }
+                            else { 
+                             //   console.log('data2: '+data2);
+                                done(null,data2);
+                            }
 
                         }
                     )
