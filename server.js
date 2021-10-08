@@ -37,7 +37,7 @@ app.post('/api/users/:_id/exercises', (req, res, next) => {
     date = (today.getFullYear()).toString() + '-' +
       (today.getMonth() + 1).toString() + '-' +
       (today.getDate()).toString();
-    console.log('undefined date becomes today as: ' + date);
+    //console.log('undefined date becomes today as: ' + date);
 
   } else {
     try {
@@ -66,6 +66,7 @@ app.post('/api/users/:_id/exercises', (req, res, next) => {
 
       addExercises(_id, description, duration, date, (err, data) => {
         if (err) res.send(err.message);
+        console.log(data);
         res.json(data);
       })
    
@@ -84,12 +85,12 @@ app.get('/api/users/:_id/logs', (req, res) => {
   let from = req.query.from;
   let to = req.query.to;
   let limit = req.query.limit;
-
+/*
   console.log('/api/users/:_id/logs ... _id'+_id);
   console.log('/api/users/:_id/logs ... from'+from);
   console.log('/api/users/:_id/logs ... to'+to);
   console.log('/api/users/:_id/logs ... limit'+limit);
-
+*/
   getUserExerciseLog(_id, from, to, limit, (err, data) => {
 
     if (err) {
@@ -97,7 +98,7 @@ app.get('/api/users/:_id/logs', (req, res) => {
       res.send(err.message);
     }
     else {
-      console.log('there: ' + data);
+      //console.log('there: ' + data);
       res.json(data);
     }
   })
