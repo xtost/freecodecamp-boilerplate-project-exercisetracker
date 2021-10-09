@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 var bodyparser = require('body-parser');
-const { createANewUser, mongoDbConnect, addExercises, getUserExerciseLog } = require('./model')
+const { createANewUser, mongoDbConnect, addExercises, getUserExerciseLog, getAllUsers } = require('./model')
 require('dotenv').config()
 
 
@@ -95,6 +95,22 @@ app.get('/api/users/:_id/logs', (req, res) => {
 
     if (err) {
       console.log('here: ' + err.message);
+      res.send(err.message);
+    }
+    else {
+      //console.log('there: ' + data);
+      res.json(data);
+    }
+  })
+
+})
+
+
+app.get('/api/users', (req, res) => {
+   
+  getAllUsers((err, data) => {
+
+    if (err) {
       res.send(err.message);
     }
     else {

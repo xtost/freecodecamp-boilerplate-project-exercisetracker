@@ -94,18 +94,7 @@ module.exports = {
                 done(err);
             } else {
                 UserExercises.findOne({ username: data.username}, (erruserexerc, userexerc) => {
-/*
-                let Exercise =  mongoose.model('Exercise', exerciseSchema);
-                
-                var newexercise = Exercise.create({
-                                username: data.username,
-                                description: description,
-                                duration: duration,
-                                date: dateval,
-                                _id: data._id
-                            }, (err)=>done(err));
-            
-*/
+
 
                     if (erruserexerc || userexerc === null) {
 
@@ -223,88 +212,12 @@ module.exports = {
 
                         }
                     )
-/*
-                .aggregate([
-                    {$match: { username: data.username }},
-                    { $project: {
-                            log: {$filter: {
-                                    input: '$log',
-                                    as: 'item',
-                                    cond: {$eq: ['$$item.description', 'asdf']}
-                                    }
-                                    },
-                                }},
-                    { $project: {
-                            log: {$filter: {
-                                    input: '$log',
-                                    as: 'item',
-                                    cond: {$eq: ['$$item.duration', 12]}
-                                 }}
-                        }}
-                        
-                        ,
-                    { $project: {
-                            log: {$filter: {
-                                    input: '$log',
-                                    as: 'item',
-                                    cond: {$gte: ['$dateFromString: {$$item.date}', (from)?(new Date('2020-09-20T07:00:00.000Z')):null]}
-                                 }}
-                        }}
-                    ], (err2,data2) => (err2)?done(err2):done(null,data2))
-                */
-               
-                    
-                        /*
-                     ,
-                        { $project: {
-                            log: {$filter: {
-                                    input: '$log',
-                                    as: 'item',
-                                    cond: {$lte: [Date('$$item.date'), (topar)?topar:null]}
-                                 }}
-                        }}*/
-                   
-             
-                
-                
-                
-                
-                /*
-                find({username: data.username})
-                    .exec(function(err2, data2)
-                        {
-
-                            if(err2) done(err2) ;
-                            else done(null,data2);
-
-                        }
-                    )
-
-*/
 
             } else if (data!== null) {
                 done(err);
             } else {
                 done(err);
             }
-
-
-                /*
-                //it would also work with data['username']
-                UserExercises.findOne({ username: data.username }, (err2, data2) => (err2 ? done(err2) : done(null, data2)));
-                */
-
-                /*
-                UserExercises
-                .aggregate([
-                    {$match: { username: data.username }},
-                    {$unwind: "$log"},
-                    {$match: {"log.description": "asdf"}},
-                    {$group: {"_id": "$_id",}}
-                ])
-
-                .exec((err2, data2) => (err2 ? done(err2) : done(null, data2)));
-*/
 
 
 
@@ -358,18 +271,17 @@ module.exports = {
             
         })
 
-        /*
-            Person.find({ favoriteFoods: foodToSearch })
-            .sort({ name: 'asc'})
-            .limit(2)
-            .select('-age')
-            .exec((err, data) => (err ? done(err) : done(null, data)));
-        */
 
     },
 
     getOnlyOneUser: function (input, done) {
         User.findOne({ username: input }, (err, data) => (err ? done(err) : done(null, data)));
+    },
+
+    getAllUsers: function (done) {
+        User.find((err,data) => {
+            (err ? done(err) : done(null, data))
+        })
     }
 
 }
